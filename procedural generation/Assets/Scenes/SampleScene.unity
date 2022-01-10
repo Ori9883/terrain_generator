@@ -163,6 +163,7 @@ MonoBehaviour:
   backgroundColor: {r: 0.58569574, g: 0.9150943, b: 0.3237362, a: 0.83137256}
   minObsHeight: 0.5
   maxObsHeight: 5
+  obsPercent: 1
 --- !u!4 &414242424
 Transform:
   m_ObjectHideFlags: 0
