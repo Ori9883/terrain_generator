@@ -10,12 +10,9 @@ public class MapGenerator : MonoBehaviour
     public Transform mapHolder;
     [Range(0, 1)] public float outlinePercent;
 
-    [Header("Generate Obstacle")]
-    public GameObject obsPrefab;
-
     [Header("All Data List")]
-    public List<Coordinate> allTilesCoord = new List<Coordinate>();
-    public Dictionary<Coordinate,GameObject> allTile= new Dictionary<Coordinate, GameObject>();
+    private List<Coordinate> allTilesCoord = new List<Coordinate>();
+    private Dictionary<Coordinate,GameObject> allTile= new Dictionary<Coordinate, GameObject>();
     private Queue<Coordinate> shuffledQueue;
 
     [Header("Obstacle appearance & color")]
@@ -37,7 +34,7 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateMap()
     {
-        for (int i = 0; i < mapSize.x; i++)
+        for (int i = 0; i < mapSize.x; i++) //generate ground
         {
             for (int j = 0; j < mapSize.y; j++)
             {
@@ -51,23 +48,23 @@ public class MapGenerator : MonoBehaviour
             }   
         }
 
-        shuffledQueue = new Queue<Coordinate>(Utilities.ShuffleCoords(allTilesCoord.ToArray())); //瓦片打乱顺序放入队列
+        shuffledQueue = new Queue<Coordinate>(Utilities.ShuffleCoords(allTilesCoord.ToArray())); //Tiles are put into the queue out of order
 
-        int obsCount = (int)(mapSize.x * mapSize.y * obsPercent);  //目标障碍物数量
+        int obsCount = (int)(mapSize.x * mapSize.y * obsPercent);  //target obstacle number
         mapCenter = new Coordinate((int)(mapSize.x/2), (int)(mapSize.y/2));
         mapObstacles = new bool[(int)mapSize.x, (int)mapSize.y];
 
-        int currentObsCount = 0; //目前障碍物数量
+        int currentObsCount = 0; //Current Obstacle number
 
         for (int i = 0; i < obsCount; i++)
         {
             Coordinate randomCoord = GetRandomCoord();
 
-            mapObstacles[randomCoord.x, randomCoord.y] = true; //假设坐标位置有障碍物
+            mapObstacles[randomCoord.x, randomCoord.y] = true; //Suppose there is an obstacle here
             currentObsCount++;
             if (randomCoord != mapCenter && MapIsFullyAccessible(mapObstacles, currentObsCount))
             {
-                #region 随机障碍物高度
+                #region Randon building height
                 float xCoord = (float)(randomCoord.x - mapSize.x / 2 + 0.5f) / mapSize.x + UnityEngine.Random.Range(0,1f);
                 float yCoord = (float)(randomCoord.x - mapSize.x / 2 + 0.5f) / mapSize.y + UnityEngine.Random.Range(0, 1f);
                 float obsHeight = Mathf.PerlinNoise(xCoord * 4, yCoord * 4) + 0.5f * Mathf.PerlinNoise(xCoord * 8, yCoord * 8) + 0.25f * Mathf.PerlinNoise(xCoord * 16, yCoord * 16);
@@ -96,24 +93,24 @@ public class MapGenerator : MonoBehaviour
                 mapObstacles[randomCoord.x, randomCoord.y] = false;
                 currentObsCount--;
             }
-        } //生成目标障碍物数量次数的障碍物
+        } //Generate obsCount number of obstacles
 
         if (renderRoad)
         {
-            GenerateRoad(mapObstacles); //生成道路
+            GenerateRoad(mapObstacles); //generate road
         }
 
     }
 
     private bool MapIsFullyAccessible(bool[,] mapObstacles, int currentObsCount)
     {
-        bool[,] mapFlags = new bool[mapObstacles.GetLength(0), mapObstacles.GetLength(1)];
+        bool[,] mapFlags = new bool[mapObstacles.GetLength(0), mapObstacles.GetLength(1)]; //map about filling been attempted or has obstacle
 
         Queue<Coordinate> queue = new Queue<Coordinate>();
-        queue.Enqueue(mapCenter);
-        mapFlags[mapCenter.x, mapCenter.y] = true;
+        queue.Enqueue(mapCenter);  //Start Point
+        mapFlags[mapCenter.x, mapCenter.y] = true; 
 
-        int accessibleCount = 1;
+        int accessibleCount = 1; //Number of floods filled, one is start point
 
         while (queue.Count > 0)
         {
@@ -128,7 +125,7 @@ public class MapGenerator : MonoBehaviour
                     if(i==0 || j == 0)
                     {
                         if(neighborX>=0 && neighborX < mapObstacles.GetLength(0)
-                            && neighborY >=0 && neighborY < mapObstacles.GetLength(1))
+                            && neighborY >=0 && neighborY < mapObstacles.GetLength(1))  //Restrictions on filling in four directions
                         {
                             if(!mapFlags[neighborX,neighborY] && !mapObstacles[neighborX, neighborY])
                             {
@@ -142,8 +139,9 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        int obsTargetCount = (int)(mapSize.x * mapSize.y) - currentObsCount; //剩下可行走的数量 = 总数-假设的障碍物数量
-        return accessibleCount == obsTargetCount; //如果假设可行走的 = 实际可行走的 证明在假设位置放置障碍不影响连续性
+        // Determine if the fillable squares plus obstacles equal all squares, using flood fill to determine connectivity
+        int obsTargetCount = (int)(mapSize.x * mapSize.y) - currentObsCount; //Number of squares without obstacles
+        return accessibleCount == obsTargetCount;
     }
 
     private void GenerateRoad(bool[,] mapObstacles)

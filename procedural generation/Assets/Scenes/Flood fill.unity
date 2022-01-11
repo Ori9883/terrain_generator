@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 2136875477351207593, guid: 3ddff6d2a699bc449a56fd4e50426b0e, type: 3}
-  mapSize: {x: 20, y: 20}
+  mapSize: {x: 10, y: 10}
   mapHolder: {fileID: 1479015819}
   outlinePercent: 0.1
   obsPrefab: {fileID: 776327970110486089, guid: 38a038e72c12565439b3bb2081a57de0, type: 3}
@@ -225,8 +225,8 @@ MonoBehaviour:
   foregroundColor: {r: 1, g: 0.3443396, b: 0.3443396, a: 0.8156863}
   backgroundColor: {r: 0.58569574, g: 0.9150943, b: 0.3237362, a: 0.83137256}
   maxObsHeight: 3
-  obsPercent: 0.605
-  renderRoad: 1
+  obsPercent: 0.304
+  renderRoad: 0
 --- !u!4 &414242424
 Transform:
   m_ObjectHideFlags: 0

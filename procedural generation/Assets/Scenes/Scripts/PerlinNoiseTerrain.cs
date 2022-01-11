@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PerlinNoiseTerrain : MonoBehaviour
 {
-    public int mDivisions; //正方形边长
+    public int mDivisions; //length of square
     public float mSize;
     public float mHeight;
 
@@ -17,7 +17,6 @@ public class PerlinNoiseTerrain : MonoBehaviour
     void CreateTerrain()
     {
         int divPlusOne = mDivisions + 1;
-        //int vertCount = (mDivisions + 1)*(mDivisions + 1);
         int vertCount = divPlusOne*divPlusOne;
 
         Vector3[] verts = new Vector3[vertCount];
@@ -32,14 +31,14 @@ public class PerlinNoiseTerrain : MonoBehaviour
 
         int triOffset = 0;
 
-        //遍历所有顶点
+        //Iterate over all vertices
         for (int i = 0; i <= mDivisions; i++)
         {
             for (int j = 0; j <= mDivisions; j++)
             {
                 float xCoord = (float)j / mDivisions;
                 float yCoord = (float)i / mDivisions;
-                float height = Mathf.PerlinNoise(xCoord * 4, yCoord * 4) + 0.5f * Mathf.PerlinNoise(xCoord * 8,yCoord * 8) + 0.25f * Mathf.PerlinNoise(xCoord * 16, yCoord * 16);
+                float height = Mathf.PerlinNoise(xCoord * 4, yCoord * 4) + 0.5f * Mathf.PerlinNoise(xCoord * 8,yCoord * 8) + 0.25f * Mathf.PerlinNoise(xCoord * 16, yCoord * 16); //overlay
                 height = Mathf.Pow(height, 2);
                 height *= mHeight;
 
@@ -68,8 +67,8 @@ public class PerlinNoiseTerrain : MonoBehaviour
         mesh.uv = uvs;
         mesh.triangles = tris;
 
+        //render mesh
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
-        Debug.Log("mesh generate: " + mesh.vertexCount);
     }
 }
