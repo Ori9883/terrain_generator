@@ -123,6 +123,70 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &97666864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 97666866}
+  - component: {fileID: 97666865}
+  m_Layer: 0
+  m_Name: tools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &97666865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97666864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705f71e1bf0ee5c4b8c25fdd3dcf4f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highB:
+  - {fileID: 5878749180387601325, guid: 1019f1180aa2a8a459b2281444d206d3, type: 3}
+  - {fileID: 3021637879622714620, guid: 71f3e88dc1425ed4888f1dde2e7e6119, type: 3}
+  - {fileID: 1132664637393885168, guid: f82badb08f4d71040b859d5758d9a972, type: 3}
+  - {fileID: 1145302574425401884, guid: fd7fa0f382c1d324b96dc92afe4ff662, type: 3}
+  - {fileID: 1572649804248396934, guid: 6a10a4c68e24cb24fa858a3b82bbe076, type: 3}
+  - {fileID: 3511026882614504319, guid: 4d4c9d7366c11ab4294ecfffe677b476, type: 3}
+  lowB:
+  - {fileID: 3338056993166585340, guid: a0c4f251bbfb4a64a983753af472b874, type: 3}
+  - {fileID: 3416115439826545973, guid: d8fa94c134091f6408910cbc2e96d836, type: 3}
+  - {fileID: 7028802825817987414, guid: d77f34abc11b78e46960695215bc4d90, type: 3}
+  - {fileID: 3394352884498375768, guid: 12a9b1eafcf499044a394448cb240ef2, type: 3}
+  - {fileID: 7053903027526636747, guid: 407a90bf780fffd4eba273a541bcefa6, type: 3}
+  - {fileID: 7905457250491407773, guid: 7589ecfff2e73cd46877225dcdc0db53, type: 3}
+  - {fileID: 8830540695747033695, guid: 76b775f6086a4a34da336660208542c3, type: 3}
+  - {fileID: 962587225232456275, guid: 3edc55e6eb2fecb46b4e9ee7df3a786a, type: 3}
+  - {fileID: 2903331107486044916, guid: 35f35e0e0d24f1a498ec6b4b091ebe8d, type: 3}
+  - {fileID: 926653003714825391, guid: 0d5bafb48441aaa479db31ed6ff425f0, type: 3}
+  - {fileID: 9188264448586587104, guid: 95531f295f4cb91458466bce540a94f5, type: 3}
+  - {fileID: 4552286398991845006, guid: aed579788ad42744e8d601877c222153, type: 3}
+  - {fileID: 8053732469199919111, guid: b21b5a28acb293344834542cbb2140fd, type: 3}
+--- !u!4 &97666866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97666864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.9668083, y: -15.000164, z: 18.581085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &414242422
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,17 +217,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 2136875477351207593, guid: 3ddff6d2a699bc449a56fd4e50426b0e, type: 3}
-  mapSize: {x: 10, y: 8}
+  mapSize: {x: 20, y: 20}
   mapHolder: {fileID: 1479015819}
   outlinePercent: 0.1
   obsPrefab: {fileID: 776327970110486089, guid: 38a038e72c12565439b3bb2081a57de0, type: 3}
-  obsCount: 45
   allTilesCoord: []
   foregroundColor: {r: 1, g: 0.3443396, b: 0.3443396, a: 0.8156863}
   backgroundColor: {r: 0.58569574, g: 0.9150943, b: 0.3237362, a: 0.83137256}
-  minObsHeight: 0.5
-  maxObsHeight: 5
-  obsPercent: 1
+  maxObsHeight: 3
+  obsPercent: 0.605
+  renderRoad: 1
 --- !u!4 &414242424
 Transform:
   m_ObjectHideFlags: 0

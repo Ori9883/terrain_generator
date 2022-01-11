@@ -72,10 +72,4 @@ public class PerlinNoiseTerrain : MonoBehaviour
         mesh.RecalculateNormals();
         Debug.Log("mesh generate: " + mesh.vertexCount);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
